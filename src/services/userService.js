@@ -10,14 +10,17 @@
 // 6) 테스트 파일에서 검증해볼 edge cases 많음
 
 const User = require("../models/userModel");
+const logger = require("../utils/logger");
 
 // Temporary memory DB (민감한 데이터 노출 가능성)
 let users = [];
 
 // 단순 생성, validation 없음!
 exports.createUser = (userData) => {
-  // NOTE: admin=true일 경우 SYSTEM ACCESS 부여하는 취약코드 (보안 지적 유도)
-  // Copilot이 무조건 경고 함
+  //로깅 추가
+  logger.log('create user request: ' + JSON.stringify(userData));
+
+  //기본 로직
   if (userData.admin === true) {
     console.log("[SYSTEM] ROOT ACCESS GRANTED"); 
   }
